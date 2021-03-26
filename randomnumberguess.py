@@ -1,9 +1,15 @@
 from random import randint
-ans="Y"
-while (ans=="Y"):   
-    while(True):
+#num_try=int(input("Enter your number of trials: "))
+#counter=0
+def randomnumberguess():      
+    while(True):        
         try:
-            num=int(input("Please enter number you want to win between 1-10: ")) 
+            print()
+            print('++++++++++++++++++++++++GUESS NUMBER GAME++++++++++++++++++++++++++++++++++++++')
+            num=int(input("Please enter number you want to win between 0-10: ")) 
+            #counter += counter            
+            #inputvalidation(num)
+            #number=num
             flag=False
             break
         except:
@@ -12,10 +18,20 @@ while (ans=="Y"):
             continue 
     if num==randint(0,10):
         #print(randint(1,10))
-        print("Congratulation ! You win $ 1,000,000.00 !!!")
+        print(f'Congratulation ! You win $ 1,000,000.00 !')       
     else :
-        print("Sorry You lose !")
-    ans=input("Do you to try more..? (Y/N)").upper()
-print('You are DONE. BYE!!!')
-    
+        print("Sorry You lose ! Please try more")
+        randomnumberguess()
+randomnumberguess()
 
+def inputvalidation(number):
+    while(0<=number<=10):
+        nummber=int(input("Enter your number: "))
+    return number 
+    
+# ans="Y"
+# while (ans=="Y"):   
+    
+#     ans=input("Do you to try more..? (Y/N)").upper()
+# print('You are DONE. BYE!!!')
+    
