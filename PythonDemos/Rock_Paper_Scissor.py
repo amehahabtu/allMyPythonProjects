@@ -1,7 +1,7 @@
 ''' 
 Date: 4/4/2021
 Pogrammer Name:  Ameha Habtu
-Description: This program is developed for my beloved daughters Eldana age 6 , and Danial age 4. 
+Description: This program is developed for my beloved daughters Eldana age 6 , and Daniela age 4. 
 It asks the user(palyer) name ,how many times the player wants to keep playing, it tells how many plays left.
 It also informs the result for each play. In the next verision it will include the time spent duration on each play 
 and total time spent, and #will have also many fun and useful features.
