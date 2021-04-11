@@ -1,4 +1,5 @@
 # fibonacci  1,2,3,5,8,13,21,----(x-1)+(x-2)
+'''
 def fibonacci(n):
     if n < 1 :
         return None  
@@ -14,4 +15,18 @@ def main():
     num_fibo =int(input("How many number of terms do you need to generate fibonacci ? "))
     for n in range(1,num_fibo+1):
         print(n,"->",fibonacci(n))
+main()
+'''
+
+def fibonacci_recursive(n):
+    if n < 1 :
+        return None  
+    if n < 3:
+        return 1  
+    return fibonacci_recursive(n-1)+fibonacci_recursive(n-2)
+     
+def main():    
+    num_fibo =int(input("How many number of terms do you need to generate fibonacci ? "))
+    for n in range(1,num_fibo+1):
+        print(n,"->",fibonacci_recursive(n))
 main()
