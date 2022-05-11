@@ -1,0 +1,9 @@
+{
+	"name": "adf-amehamyadp203",
+	"location": "westus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "a2d3f9c5-4efb-4f29-9086-9d426c8d7a57",
+		"tenantId": "344b3aa5-3d10-43cd-be82-7f7569e1bcf6"
+	}
+}
