@@ -55,9 +55,16 @@
 				]
 			},
 			{
-				"name": "Data flow1",
+				"name": "JoinandAggregateData",
 				"type": "ExecuteDataFlow",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "IngestintoADLS",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "1.00:00:00",
 					"retry": 0,

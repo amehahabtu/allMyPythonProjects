@@ -1,0 +1,16 @@
+{
+	"name": "DS_AggregatedTaxiData",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_SQLDW",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "AggregatedTaxiData"
+		}
+	}
+}

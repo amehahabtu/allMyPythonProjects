@@ -19,7 +19,15 @@
 					"name": "TripFaresSQL"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "DS_AggregatedTaxiData",
+						"type": "DatasetReference"
+					},
+					"name": "SQLDWsink"
+				}
+			],
 			"transformations": [
 				{
 					"name": "InnerJoinWithTripFares"
@@ -73,7 +81,19 @@
 				"     broadcast: 'auto')~> InnerJoinWithTripFares",
 				"InnerJoinWithTripFares aggregate(groupBy(payment_type),",
 				"     Average_Fare = avg(toInteger(fare_amount)),",
-				"          Total_Trip_Distance = sum(toInteger(trip_distance))) ~> AggregateByPaymentType"
+				"          Total_Trip_Distance = sum(toInteger(trip_distance))) ~> AggregateByPaymentType",
+				"AggregateByPaymentType sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     recreate:true,",
+				"     format: 'table',",
+				"     staged: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> SQLDWsink"
 			]
 		}
 	}
