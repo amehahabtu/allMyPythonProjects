@@ -1,0 +1,80 @@
+{
+	"name": "JoinandAggregateData",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DS_TripDataCSV",
+						"type": "DatasetReference"
+					},
+					"name": "TripDataCSV"
+				},
+				{
+					"dataset": {
+						"referenceName": "DS_TripFares",
+						"type": "DatasetReference"
+					},
+					"name": "TripFaresSQL"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "InnerJoinWithTripFares"
+				},
+				{
+					"name": "AggregateByPaymentType"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          medallion as string,",
+				"          hack_license as string,",
+				"          vendor_id as string,",
+				"          rate_code as string,",
+				"          store_and_fwd_flag as string,",
+				"          pickup_datetime as string,",
+				"          dropoff_datetime as string,",
+				"          passenger_count as string,",
+				"          trip_time_in_secs as string,",
+				"          trip_distance as string,",
+				"          pickup_longitude as string,",
+				"          pickup_latitude as string,",
+				"          dropoff_longitude as string,",
+				"          dropoff_latitude as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> TripDataCSV",
+				"source(output(",
+				"          medallion as string,",
+				"          hack_license as string,",
+				"          vendor_id as string,",
+				"          pickup_datetime as string,",
+				"          payment_type as string,",
+				"          fare_amount as string,",
+				"          surcharge as string,",
+				"          mta_tax as string,",
+				"          tip_amount as string,",
+				"          tolls_amount as string,",
+				"          total_amount as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> TripFaresSQL",
+				"TripDataCSV, TripFaresSQL join(TripDataCSV@medallion == TripFaresSQL@medallion",
+				"     && TripDataCSV@hack_license == TripFaresSQL@hack_license",
+				"     && TripDataCSV@vendor_id == TripFaresSQL@vendor_id",
+				"     && TripDataCSV@pickup_datetime == TripFaresSQL@pickup_datetime,",
+				"     joinType:'inner',",
+				"     broadcast: 'auto')~> InnerJoinWithTripFares",
+				"InnerJoinWithTripFares aggregate(groupBy(payment_type),",
+				"     Average_Fare = avg(toInteger(fare_amount)),",
+				"          Total_Trip_Distance = sum(toInteger(trip_distance))) ~> AggregateByPaymentType"
+			]
+		}
+	}
+}
