@@ -1,0 +1,18 @@
+{
+	"name": "trg_taxidatascheduled",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Minute",
+				"interval": 5,
+				"startTime": "2022-05-11T09:47:00",
+				"endTime": "2022-05-13T10:00:00",
+				"timeZone": "Pacific Standard Time"
+			}
+		}
+	}
+}
